@@ -20,7 +20,7 @@ with open("DONTOPENMEWHILELIVE.oauth", "r") as file: #must contain the code gath
 	file.close
 
 #What you'd like to name your bot
-BOT = "JuliansTwitchBot"
+BOT = "JulianstapTwitchBot"
 
 #The channel you want to monitor
 CHANNEL = "Julianstap"
