@@ -59,10 +59,10 @@ end
 
 function svcTimer()
 	if not players then return end
-	local file = io.open("data.json", "r")
+	local file = io.open("StreamersVsChatData.json", "r")
 	local content = file:read("*all")
 	file:close()
-	file = io.open("data.json", "w") --overwrite file
+	file = io.open("StreamersVsChatData.json", "w") --overwrite file
 	file:close()
 	
 	if not content or content == "" then return end

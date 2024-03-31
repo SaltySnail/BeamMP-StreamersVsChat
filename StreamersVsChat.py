@@ -30,7 +30,7 @@ OWNER = "Julianstap"
 
 BEAMMP_NAME = "-1" #-1 for all players
 
-STREAMERSVSCHAT_BEAMMP_SERVER_FOLDER = "C:/Users/Julian/Desktop/beammp_Server/windows/Resources/Server/StreamersVsChat"
+BEAMMP_SERVER_EXE_FOLDER = "C:/Users/Julian/Desktop/beammp_Server/windows"
 
 PRESS_TIME = 0.5 #s
 SHORT_COOLDOWN = 1 #s
@@ -566,7 +566,12 @@ irc.send((	"PASS " + PASS + "\n" +
 def gamecontrol():
 	global message
 	ignitionEndTime = 100000000000
-	
+	emptyBuffer = {
+		"name": "",
+		"message": "",
+		"argument": ""
+	}
+	sendToBeamNG(emptyBuffer) #create the data file
 	printPinMessage()
 	while True:
 		commandsOnChat()
@@ -747,14 +752,14 @@ def sendToBeamNG(buffer):
 	existing_data = []  # Initialize with an empty list
 
 	# Check if the file exists and is not empty
-	if os.path.isfile(STREAMERSVSCHAT_BEAMMP_SERVER_FOLDER + "/data.json") and os.path.getsize(STREAMERSVSCHAT_BEAMMP_SERVER_FOLDER + "/data.json") > 0:
-		with open(STREAMERSVSCHAT_BEAMMP_SERVER_FOLDER + "/data.json", "rb") as file:
+	if os.path.isfile(BEAMMP_SERVER_EXE_FOLDER + "/StreamersVsChatData.json") and os.path.getsize(BEAMMP_SERVER_EXE_FOLDER + "/StreamersVsChatData.json") > 0:
+		with open(BEAMMP_SERVER_EXE_FOLDER + "/StreamersVsChatData.json", "rb") as file:
 			if file.read(2) != '[]' and file.read(2) != '{}': #https://stackoverflow.com/questions/47792142/how-to-check-if-json-file-contains-only-empty-array
 				file.seek(0)  # it may be redundant but it does not hurt
 				existing_data = json.load(file)
 			# Append the new data to the existing data
 	existing_data.append(buffer)
-	with open(STREAMERSVSCHAT_BEAMMP_SERVER_FOLDER + "/data.json", "w") as file:
+	with open(BEAMMP_SERVER_EXE_FOLDER + "/StreamersVsChatData.json", "w") as file:
 		json.dump(existing_data, file)
 		file.close()
 
