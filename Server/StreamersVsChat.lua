@@ -59,10 +59,10 @@ end
 
 function svcTimer()
 	if not players then return end
-	local file = io.open("C:\\Users\\Julian\\Documents\\dev\\TwitchPlays\\data.json", "r")
+	local file = io.open("data.json", "r")
 	local content = file:read("*all")
 	file:close()
-	file = io.open("C:\\Users\\Julian\\Documents\\dev\\TwitchPlays\\data.json", "w") --overwrite file
+	file = io.open("data.json", "w") --overwrite file
 	file:close()
 	
 	if not content or content == "" then return end

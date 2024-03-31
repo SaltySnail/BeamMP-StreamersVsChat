@@ -30,6 +30,7 @@ OWNER = "Julianstap"
 
 BEAMMP_NAME = "-1" #-1 for all players
 
+STREAMERSVSCHAT_BEAMMP_SERVER_FOLDER = "C:/Users/Julian/Desktop/beammp_Server/windows/Resources/Server/StreamersVsChat"
 
 PRESS_TIME = 0.5 #s
 SHORT_COOLDOWN = 1 #s
@@ -746,23 +747,23 @@ def sendToBeamNG(buffer):
 	existing_data = []  # Initialize with an empty list
 
 	# Check if the file exists and is not empty
-	if os.path.isfile("data.json") and os.path.getsize("data.json") > 0:
-		with open("data.json", "rb") as file:
+	if os.path.isfile(STREAMERSVSCHAT_BEAMMP_SERVER_FOLDER + "/data.json") and os.path.getsize(STREAMERSVSCHAT_BEAMMP_SERVER_FOLDER + "/data.json") > 0:
+		with open(STREAMERSVSCHAT_BEAMMP_SERVER_FOLDER + "/data.json", "rb") as file:
 			if file.read(2) != '[]' and file.read(2) != '{}': #https://stackoverflow.com/questions/47792142/how-to-check-if-json-file-contains-only-empty-array
 				file.seek(0)  # it may be redundant but it does not hurt
 				existing_data = json.load(file)
 			# Append the new data to the existing data
 	existing_data.append(buffer)
-	with open("data.json", "w") as file:
+	with open(STREAMERSVSCHAT_BEAMMP_SERVER_FOLDER + "/data.json", "w") as file:
 		json.dump(existing_data, file)
 		file.close()
 
-def playSound(file, volume = 100):
-	soundsPath = "C:\\Users\\Julian\\Documents\\dev\\TwitchPlays\\Sounds\\"
-	p = vlc.MediaPlayer("file:///" + soundsPath + file)
-	p.audio_set_delay(100)
-	p.audio_set_volume(volume)
-	p.play()
+# def playSound(file, volume = 100):
+# 	soundsPath = "C:\\Users\\Julian\\Documents\\dev\\TwitchPlays\\Sounds\\"
+# 	p = vlc.MediaPlayer("file:///" + soundsPath + file)
+# 	p.audio_set_delay(100)
+# 	p.audio_set_volume(volume)
+# 	p.play()
 	
 
 def twitch():
