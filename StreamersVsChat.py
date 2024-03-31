@@ -38,10 +38,11 @@ SHORT_COOLDOWN = 1 #s
 BEAMNGCOMMANDS = [
 					{	#use honk as an example for a command which triggers two commands and has no sound effect
 						"command":"honk",
+						"waitingOnEndOfSound":False, #don't change this variable, this is used for logic
 						"caseSensitive":False,
 						"pressTime":PRESS_TIME,
 						"cooldown":SHORT_COOLDOWN,
-						"cooldownEndTime":time.time(),
+						"cooldownEndTime":time.time(), #don't change this variable, this is used for logic
 						"hasSecondFunction":True,
 						"hasSound":False,
 						"beamng":True,
@@ -51,16 +52,17 @@ BEAMNGCOMMANDS = [
 						"secondFunction":{"beamng":True,
 							"beamCommand":"stopHonk",
 							"argument":"nil",
-							"endTime":100000000000
+							"endTime":100000000000 #don't change this variable, this is used for logic
 						}
 					},
 					{	#use siren as an example for a command which triggers one command and has no sound effect
 						"command":"siren",
+						"waitingOnEndOfSound":False, #don't change this variable, this is used for logic
 						"caseSensitive":False,
 						"pressTime":PRESS_TIME,
 						"cooldown":SHORT_COOLDOWN,
 						"argument":"nil",
-						"cooldownEndTime":time.time(),
+						"cooldownEndTime":time.time(), #don't change this variable, this is used for logic
 						"hasSecondFunction":False,
 						"hasSound":False,
 						"beamng":True,
@@ -69,10 +71,11 @@ BEAMNGCOMMANDS = [
 					},
 					{	
 						"command":"brake",
+						"waitingOnEndOfSound":False, #don't change this variable, this is used for logic
 						"caseSensitive":False,
 						"pressTime":PRESS_TIME,
 						"cooldown":SHORT_COOLDOWN,
-						"cooldownEndTime":time.time(),
+						"cooldownEndTime":time.time(), #don't change this variable, this is used for logic
 						"hasSecondFunction":True,
 						"hasSound":False,
 						"beamng":True,
@@ -84,15 +87,16 @@ BEAMNGCOMMANDS = [
 							"beamng":True,
 							"beamCommand":"stopBrake",
 							"argument":"nil",
-							"endTime":100000000000
+							"endTime":100000000000 #don't change this variable, this is used for logic
 						}
 					},
 					{	
 						"command":"gas",
+						"waitingOnEndOfSound":False, #don't change this variable, this is used for logic
 						"caseSensitive":False,
 						"pressTime":PRESS_TIME,
 						"cooldown":SHORT_COOLDOWN,
-						"cooldownEndTime":time.time(),
+						"cooldownEndTime":time.time(), #don't change this variable, this is used for logic
 						"hasSecondFunction":True,
 						"hasSound":False,
 						"beamng":True,
@@ -103,23 +107,24 @@ BEAMNGCOMMANDS = [
 							"beamng":True,
 							"beamCommand":"stopGas",
 							"argument":"nil",
-							"endTime":100000000000
+							"endTime":100000000000 #don't change this variable, this is used for logic
 						}
 					},
 					{
 						"command":"And his name is... JOHN CENA!!!",
+						"waitingOnEndOfSound":False, #don't change this variable, this is used for logic
 						"caseSensitive":True,
 						"pressTime":1,
 						"cooldown":1800, #30 minutes
-						"cooldownEndTime":time.time(),
+						"cooldownEndTime":time.time(), #don't change this variable, this is used for logic
 						"hasSecondFunction":True,
 						"hasSound":True,
 						"delayAfterSound":0.1,
-						"soundDelayEndTime":0,
+						"soundDelayEndTime":0, #don't change this variable, this is used for logic
 						"soundName":"JOHNCENA",
 						# "sound":{ #sound effects are now done in beamng, so that everyone hears them
 						# 	"delay":0,
-						# 	"endTime":time.time(),
+						# 	"endTime":time.time(), #don't change this variable, this is used for logic
 						# 	"filename":"JOHNCENA.mp3",
 						# 	"volume":80
 						# },
@@ -132,44 +137,46 @@ BEAMNGCOMMANDS = [
 							"beamCommand":"hop",
 							"argument":"20",
 							"delay":1,
-							"endTime":100000000000
+							"endTime":100000000000 #don't change this variable, this is used for logic
 						},
 						"thirdFunction":{
 							"beamng":True,
 							"beamCommand":"hop",
 							"argument":"-40",
-							"endTime":100000000000
+							"endTime":100000000000 #don't change this variable, this is used for logic
 						}
 					},
 					{
 						"command":"boost",
+						"waitingOnEndOfSound":False, #don't change this variable, this is used for logic
 						"caseSensitive":False,
 						"pressTime":PRESS_TIME,
 						"cooldown":SHORT_COOLDOWN,
-						"cooldownEndTime":time.time(),
+						"cooldownEndTime":time.time(), #don't change this variable, this is used for logic
 						"hasSecondFunction":False,
 						# "hasSound":False, #implemented in VE lua
 						"beamng":True,
 						"hasThirdFunction":False,
 						# "sound":{
 						# 	"delay":0,
-						# 	"endTime":time.time(),
+						# 	"endTime":time.time(), #don't change this variable, this is used for logic
 						# 	"filename":"GASGASGAS.mp3",
 						# 	"volume":80
 						# },
 						"hasSound":True,
 						"delayAfterSound":0.1,
-						"soundDelayEndTime":0,
+						"soundDelayEndTime":0, #don't change this variable, this is used for logic
 						"soundName":"GASGASGAS",
 						"beamCommand":"boost",
 						"argument":"10"
 					},
 					{
 						"command":"boost backwards",
+						"waitingOnEndOfSound":False, #don't change this variable, this is used for logic
 						"caseSensitive":False,
 						"pressTime":PRESS_TIME,
 						"cooldown":SHORT_COOLDOWN,
-						"cooldownEndTime":time.time(),
+						"cooldownEndTime":time.time(), #don't change this variable, this is used for logic
 						"hasSecondFunction":False,
 						"hasSound":False,
 						"beamng":True,
@@ -179,10 +186,11 @@ BEAMNGCOMMANDS = [
 					},
 					{	
 						"command":"handbrake",
+						"waitingOnEndOfSound":False, #don't change this variable, this is used for logic
 						"caseSensitive":False,
 						"pressTime":PRESS_TIME,
 						"cooldown":SHORT_COOLDOWN,
-						"cooldownEndTime":time.time(),
+						"cooldownEndTime":time.time(), #don't change this variable, this is used for logic
 						"hasSecondFunction":True,
 						"hasSound":False,
 						"beamng":True,
@@ -193,28 +201,29 @@ BEAMNGCOMMANDS = [
 							"beamng":True,
 							"beamCommand":"stopHandbrake",
 							"argument":"nil",
-							"endTime":100000000000
+							"endTime":100000000000 #don't change this variable, this is used for logic
 						}
 					},
 					{
 						"command":"i'm blind",
+						"waitingOnEndOfSound":False, #don't change this variable, this is used for logic
 						"caseSensitive":False,
 						"pressTime":3, #sound effect is 3 seconds long
 						"cooldown":600,
-						"cooldownEndTime":time.time(),
+						"cooldownEndTime":time.time(), #don't change this variable, this is used for logic
 						"hasSecondFunction":True,
 						# "hasSound":False, #implemented in VE lua
 						"beamng":True,
 						"hasThirdFunction":False,
 						# "sound":{
 						# 	"delay":0,
-						# 	"endTime":time.time(),
+						# 	"endTime":time.time(), #don't change this variable, this is used for logic
 						# 	"filename":"blind.mp3",
 						# 	"volume":100
 						# },
 						"hasSound":True,
 						"delayAfterSound":1,
-						"soundDelayEndTime":0,
+						"soundDelayEndTime":0, #don't change this variable, this is used for logic
 						"soundName":"blind",
 						"beamCommand":"blind",
 						"argument":"nil",
@@ -222,15 +231,16 @@ BEAMNGCOMMANDS = [
 							"beamng":True,
 							"beamCommand":"stopBlind",
 							"argument":"nil",
-							"endTime":100000000000
+							"endTime":100000000000 #don't change this variable, this is used for logic
 						}
 					},
 					{
 						"command":"look back",
+						"waitingOnEndOfSound":False, #don't change this variable, this is used for logic
 						"caseSensitive":False,
 						"pressTime":PRESS_TIME,
 						"cooldown":SHORT_COOLDOWN,
-						"cooldownEndTime":time.time(),
+						"cooldownEndTime":time.time(), #don't change this variable, this is used for logic
 						"hasSecondFunction":True,
 						"hasSound":False,
 						"beamng":True,
@@ -241,15 +251,16 @@ BEAMNGCOMMANDS = [
 							"beamng":True,
 							"beamCommand":"stopLookBack",
 							"argument":"nil",
-							"endTime":100000000000
+							"endTime":100000000000 #don't change this variable, this is used for logic
 						}
 					},
 					{
 						"command":"moon",
+						"waitingOnEndOfSound":False, #don't change this variable, this is used for logic
 						"caseSensitive":False,
 						"pressTime":1,
 						"cooldown":SHORT_COOLDOWN,
-						"cooldownEndTime":time.time(),
+						"cooldownEndTime":time.time(), #don't change this variable, this is used for logic
 						"hasSecondFunction":True,
 						"hasSound":False,
 						"beamng":True,
@@ -260,15 +271,16 @@ BEAMNGCOMMANDS = [
 							"beamng":True,
 							"beamCommand":"earth",
 							"argument":"nil",
-							"endTime":100000000000
+							"endTime":100000000000 #don't change this variable, this is used for logic
 						}
 					},
 					{
 						"command":"clutch",
+						"waitingOnEndOfSound":False, #don't change this variable, this is used for logic
 						"caseSensitive":False,
 						"pressTime":PRESS_TIME,
 						"cooldown":SHORT_COOLDOWN,
-						"cooldownEndTime":time.time(),
+						"cooldownEndTime":time.time(), #don't change this variable, this is used for logic
 						"hasSecondFunction":True,
 						"hasSound":False,
 						"beamng":True,
@@ -279,26 +291,27 @@ BEAMNGCOMMANDS = [
 							"beamng":True,
 							"beamCommand":"stopClutch",
 							"argument":"nil",
-							"endTime":100000000000
+							"endTime":100000000000 #don't change this variable, this is used for logic
 						}
 					},
 					{
 						"command":"drift",
+						"waitingOnEndOfSound":False, #don't change this variable, this is used for logic
 						"caseSensitive":False,
 						"pressTime":PRESS_TIME,
 						"cooldown":SHORT_COOLDOWN,
-						"cooldownEndTime":time.time(),
+						"cooldownEndTime":time.time(), #don't change this variable, this is used for logic
 						"hasSecondFunction":True,
 						# "hasSound":False, #implemented in VE lua
 						# "sound":{
 						# 	"delay":0,
-						# 	"endTime":time.time(),
+						# 	"endTime":time.time(), #don't change this variable, this is used for logic
 						# 	"filename":"tokyo.mp3",
 						# 	"volume":100
 						# },
 						"hasSound":True,
 						"delayAfterSound":0.1,
-						"soundDelayEndTime":0,
+						"soundDelayEndTime":0, #don't change this variable, this is used for logic
 						"soundName":"tokyo",
 						"beamng":True,
 						"hasThirdFunction":False,
@@ -308,15 +321,16 @@ BEAMNGCOMMANDS = [
 							"beamng":True,
 							"beamCommand":"stopDrift",
 							"argument":"nil",
-							"endTime":100000000000
+							"endTime":100000000000 #don't change this variable, this is used for logic
 						}
 					},
 					{
 						"command":"look left",
+						"waitingOnEndOfSound":False, #don't change this variable, this is used for logic
 						"caseSensitive":False,
 						"pressTime":PRESS_TIME,
 						"cooldown":SHORT_COOLDOWN,
-						"cooldownEndTime":time.time(),
+						"cooldownEndTime":time.time(), #don't change this variable, this is used for logic
 						"hasSecondFunction":True,
 						"hasSound":False,
 						"beamng":True,
@@ -327,15 +341,16 @@ BEAMNGCOMMANDS = [
 							"beamng":True,
 							"beamCommand":"stopLookLeft",
 							"argument":"nil",
-							"endTime":100000000000
+							"endTime":100000000000 #don't change this variable, this is used for logic
 						}
 					},
 					{
 						"command":"look right",
+						"waitingOnEndOfSound":False, #don't change this variable, this is used for logic
 						"caseSensitive":False,
 						"pressTime":PRESS_TIME,
 						"cooldown":SHORT_COOLDOWN,
-						"cooldownEndTime":time.time(),
+						"cooldownEndTime":time.time(), #don't change this variable, this is used for logic
 						"hasSecondFunction":True,
 						"hasSound":False,
 						"beamng":True,
@@ -346,15 +361,16 @@ BEAMNGCOMMANDS = [
 							"beamng":True,
 							"beamCommand":"stopLookRight",
 							"argument":"nil",
-							"endTime":100000000000
+							"endTime":100000000000 #don't change this variable, this is used for logic
 						}
 					},
 					{
 						"command":"right",
+						"waitingOnEndOfSound":False, #don't change this variable, this is used for logic
 						"caseSensitive":False,
 						"pressTime":PRESS_TIME,
 						"cooldown":SHORT_COOLDOWN,
-						"cooldownEndTime":time.time(),
+						"cooldownEndTime":time.time(), #don't change this variable, this is used for logic
 						"hasSecondFunction":True,
 						"hasSound":False,
 						"beamng":True,
@@ -365,15 +381,16 @@ BEAMNGCOMMANDS = [
 							"beamng":True,
 							"beamCommand":"stopSteerRight",
 							"argument":"nil",
-							"endTime":100000000000
+							"endTime":100000000000 #don't change this variable, this is used for logic
 						}
 					},
 					{
 						"command":"left",
+						"waitingOnEndOfSound":False, #don't change this variable, this is used for logic
 						"caseSensitive":False,
 						"pressTime":PRESS_TIME,
 						"cooldown":SHORT_COOLDOWN,
-						"cooldownEndTime":time.time(),
+						"cooldownEndTime":time.time(), #don't change this variable, this is used for logic
 						"hasSecondFunction":True,
 						"hasSound":False,
 						"beamng":True,
@@ -384,19 +401,20 @@ BEAMNGCOMMANDS = [
 							"beamng":True,
 							"beamCommand":"stopSteerLeft",
 							"argument":"nil",
-							"endTime":100000000000
+							"endTime":100000000000 #don't change this variable, this is used for logic
 						}
 					},
 					{
 						"command":"ice ice baby",
+						"waitingOnEndOfSound":False, #don't change this variable, this is used for logic
 						"caseSensitive":False,
 						"pressTime":PRESS_TIME,
 						"cooldown":SHORT_COOLDOWN,
-						"cooldownEndTime":time.time(),
+						"cooldownEndTime":time.time(), #don't change this variable, this is used for logic
 						"hasSecondFunction":True,
 						"hasSound":True,
 						"delayAfterSound":1,
-						"soundDelayEndTime":0,
+						"soundDelayEndTime":0, #don't change this variable, this is used for logic
 						"soundName":"iceIceBaby",
 						"beamng":True,
 						"hasThirdFunction":False,
@@ -406,22 +424,23 @@ BEAMNGCOMMANDS = [
 							"beamng":True,
 							"beamCommand":"stopIce",
 							"argument":"nil",
-							"endTime":100000000000
+							"endTime":100000000000 #don't change this variable, this is used for logic
 						}
 					},
 					{
 						"command":"DO A BARREL ROLL!", #TODO: figure out a better way to do multiple functions on one command
+						"waitingOnEndOfSound":False, #don't change this variable, this is used for logic
 						"caseSensitive":True,
 						"pressTime":0.5, #same as PRESS_TIME, but that could change.
 						"cooldown":1200,
-						"cooldownEndTime":time.time(),
+						"cooldownEndTime":time.time(), #don't change this variable, this is used for logic
 						"hasSound":True,
 						"delayAfterSound":1,
-						"soundDelayEndTime":0,
+						"soundDelayEndTime":0, #don't change this variable, this is used for logic
 						"soundName":"barrelroll",
 						# "sound":{
 						# 	"delay":1,
-						# 	"endTime":time.time(),
+						# 	"endTime":time.time(), #don't change this variable, this is used for logic
 						# 	"filename":"barrelroll.mp3",
 						# 	"volume":100
 						# },
@@ -433,7 +452,7 @@ BEAMNGCOMMANDS = [
 							"beamng":True,
 							"beamCommand":"DO A BARREL ROLL!",
 							"argument":"-7.5",
-							"endTime":100000000000,
+							"endTime":100000000000, #don't change this variable, this is used for logic
 							"delay":0.6
 						},
 						"hasThirdFunction":True,
@@ -441,16 +460,17 @@ BEAMNGCOMMANDS = [
 							"beamng":True,
 							"beamCommand":"DO A BARREL ROLL!",
 							"argument":"5",
-							"endTime":100000000000
+							"endTime":100000000000 #don't change this variable, this is used for logic
 						}
 					},
 					{
 						"command":"warning",
+						"waitingOnEndOfSound":False, #don't change this variable, this is used for logic
 						"caseSensitive":False,
 						"pressTime":PRESS_TIME,
 						"cooldown":SHORT_COOLDOWN,
 						"argument":"nil",
-						"cooldownEndTime":time.time(),
+						"cooldownEndTime":time.time(), #don't change this variable, this is used for logic
 						"hasSecondFunction":False,
 						"hasSound":False,
 						"beamng":True,
@@ -459,10 +479,11 @@ BEAMNGCOMMANDS = [
 					},
 					{
 						"command":"hop",
+						"waitingOnEndOfSound":False, #don't change this variable, this is used for logic
 						"caseSensitive":False,
 						"pressTime":PRESS_TIME,
 						"cooldown":SHORT_COOLDOWN,
-						"cooldownEndTime":time.time(),
+						"cooldownEndTime":time.time(), #don't change this variable, this is used for logic
 						"hasSecondFunction":False,
 						"hasSound":False,
 						"beamng":True,
@@ -472,10 +493,11 @@ BEAMNGCOMMANDS = [
 					},
 					{
 						"command":"change camera",
+						"waitingOnEndOfSound":False, #don't change this variable, this is used for logic
 						"caseSensitive":False,
 						"pressTime":PRESS_TIME,
 						"cooldown":SHORT_COOLDOWN,
-						"cooldownEndTime":time.time(),
+						"cooldownEndTime":time.time(), #don't change this variable, this is used for logic
 						"hasSecondFunction":False,
 						"hasSound":False,
 						"beamng":True,
@@ -485,10 +507,11 @@ BEAMNGCOMMANDS = [
 					},
 					{
 						"command":"lights",
+						"waitingOnEndOfSound":False, #don't change this variable, this is used for logic
 						"caseSensitive":False,
 						"pressTime":PRESS_TIME,
 						"cooldown":SHORT_COOLDOWN,
-						"cooldownEndTime":time.time(),
+						"cooldownEndTime":time.time(), #don't change this variable, this is used for logic
 						"hasSecondFunction":False,
 						"hasSound":False,
 						"beamng":True,
@@ -498,14 +521,15 @@ BEAMNGCOMMANDS = [
 					},
 					{
 						"command":"you spin me right round",
+						"waitingOnEndOfSound":False, #don't change this variable, this is used for logic
 						"caseSensitive":False,
 						"pressTime":PRESS_TIME,
 						"cooldown":600,
-						"cooldownEndTime":time.time(),
+						"cooldownEndTime":time.time(), #don't change this variable, this is used for logic
 						"hasSecondFunction":False,
 						"hasSound":True,
 						"delayAfterSound":0.1,
-						"soundDelayEndTime":0,
+						"soundDelayEndTime":0, #don't change this variable, this is used for logic
 						"soundName":"spinMeRightRound",
 						"beamng":True,
 						"hasThirdFunction":False,
@@ -514,14 +538,15 @@ BEAMNGCOMMANDS = [
 					},
 					{
 						"command":"explode",
+						"waitingOnEndOfSound":False, #don't change this variable, this is used for logic
 						"caseSensitive":False,
 						"pressTime":PRESS_TIME,
 						"cooldown":3600,
-						"cooldownEndTime":time.time(),
+						"cooldownEndTime":time.time(), #don't change this variable, this is used for logic
 						"hasSecondFunction":False,
 						"hasSound":True,
 						"delayAfterSound":2.5,
-						"soundDelayEndTime":0,
+						"soundDelayEndTime":0, #don't change this variable, this is used for logic
 						"soundName":"fbiOpenUp",
 						"beamng":True,
 						"hasThirdFunction":False,
@@ -530,21 +555,21 @@ BEAMNGCOMMANDS = [
 					},
 					{
 						"command":"backflip!",
+						"waitingOnEndOfSound":False, #don't change this variable, this is used for logic
 						"caseSensitive":False,
 						"pressTime":PRESS_TIME,
-						# "cooldown":1800,
-						"cooldown":0,
-						"cooldownEndTime":time.time(),
+						"cooldown":1800,
+						"cooldownEndTime":time.time(), #don't change this variable, this is used for logic
 						"hasSecondFunction":True,
 						"secondFunction":{
 							"beamng":True,
 							"beamCommand":"backflip",
 							"argument":"-4.5",
-							"endTime":100000000000
+							"endTime":100000000000 #don't change this variable, this is used for logic
 						},
 						"hasSound":True,
 						"delayAfterSound":6,
-						"soundDelayEndTime":0,
+						"soundDelayEndTime":0, #don't change this variable, this is used for logic
 						"soundName":"backflip",
 						"beamng":True,
 						"hasThirdFunction":False,
@@ -692,19 +717,21 @@ def handleSound(commandData):
 def commandsOnChat():
 	global message
 	for data in BEAMNGCOMMANDS:
-		if (not data["caseSensitive"] and data["command"] == message.lower()) or (data["caseSensitive"] and data["command"] == message):
+		if (not data["caseSensitive"] and data["command"] == message.lower()) or (data["caseSensitive"] and data["command"] == message) or data["waitingOnEndOfSound"]:
 			if data["cooldown"]:
 				if time.time() < data["cooldownEndTime"]:
 					message = "" #this command is still on cooldown
-					return
+					continue
 			if data["beamng"]:
 				if data["hasSound"]:
 					if data["soundDelayEndTime"] == 0:
+						data["waitingOnEndOfSound"] = True
 						handleSound(data)
 				if data["hasSound"]:
 					if time.time() < data["soundDelayEndTime"]:
-						return
+						continue
 					else:
+						data["waitingOnEndOfSound"] = False
 						data["soundDelayEndTime"] = 0
 				buffer = {
 					"name": BEAMMP_NAME,
