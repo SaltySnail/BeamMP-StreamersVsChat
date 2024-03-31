@@ -2,7 +2,7 @@
 Let your twitch chat wreak havoc on your server.
 
 To make this work you'll need to change some stuff:
-- First you need to get your twitch API key (for example [here](https://twitchapps.com/tmi/)). Copy the API key (including 'oauth:') into a file named 'DONTOPENMEWHILELIVE.oauth'. 
+- First you need to get your twitch API key (for example [here](https://twitchapps.com/tmi/)). Put the API key (including 'oauth:') into a file named 'DONTOPENMEWHILELIVE.oauth' (create a file with that exact name). 
 - Open StreamersVsChat.py and replace everything that says "Julianstap" (my twitch) with your twitch username. Easiest way to do this is have Visual Studio Code, open the .workspace file, press ctrl+f and search for Julianstap and replace all with your username.
 - Replace BEAMMP_SERVER_EXE_FOLDER with the folder where your *BeamMP-Server.exe* is located.
 - Open .vscode/tasks.json and replace everything that has 'C:/Users/Julian/Desktop/beammp_Server/windows' with the folder where your *BeamMP-Server.exe* is located
