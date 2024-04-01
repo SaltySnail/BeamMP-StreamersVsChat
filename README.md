@@ -6,6 +6,7 @@ To make this work you'll need to change some stuff:
 - Open StreamersVsChat.py and replace everything that says "Julianstap" (my twitch) with your twitch username. Easiest way to do this is have Visual Studio Code, open the .workspace file, press ctrl+f and search for Julianstap and replace all with your username.
 - Replace BEAMMP_SERVER_EXE_FOLDER with the folder where your *BeamMP-Server.exe* is located.
 - Open .vscode/tasks.json and replace everything that has 'C:/Users/Julian/Desktop/beammp_Server/windows' with the folder where your *BeamMP-Server.exe* is located
+- Inside '*BeamMP-Server.exe Location*/Resources/Server/' create a folder named StreamersVsChat
 
 If you want have the commands only apply on you, change BEAMMP_NAME to your beammp username.
 
