@@ -49,7 +49,8 @@ BEAMNGCOMMANDS = [
 						"hasThirdFunction":False,
 						"beamCommand":"honk",
 						"argument":"nil",
-						"secondFunction":{"beamng":True,
+						"secondFunction":{
+							"beamng":True,
 							"beamCommand":"stopHonk",
 							"argument":"nil",
 							"endTime":100000000000 #don't change this variable, this is used for logic
@@ -151,7 +152,7 @@ BEAMNGCOMMANDS = [
 						"waitingOnEndOfSound":False, #don't change this variable, this is used for logic
 						"caseSensitive":False,
 						"pressTime":PRESS_TIME,
-						"cooldown":SHORT_COOLDOWN,
+						"cooldown":45,
 						"cooldownEndTime":time.time(), #don't change this variable, this is used for logic
 						"hasSecondFunction":False,
 						# "hasSound":False, #implemented in VE lua
@@ -408,7 +409,7 @@ BEAMNGCOMMANDS = [
 						"command":"ice ice baby",
 						"waitingOnEndOfSound":False, #don't change this variable, this is used for logic
 						"caseSensitive":False,
-						"pressTime":PRESS_TIME,
+						"pressTime":3,
 						"cooldown":SHORT_COOLDOWN,
 						"cooldownEndTime":time.time(), #don't change this variable, this is used for logic
 						"hasSecondFunction":True,
