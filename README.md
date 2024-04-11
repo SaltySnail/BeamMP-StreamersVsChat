@@ -5,7 +5,7 @@ skip to the linux part if you are using that.
 
 To make this work you'll need to change some stuff:
 - First you need to get your twitch API key (for example [here](https://twitchapps.com/tmi/)). Put the API key (including 'oauth:') into a file named 'DONTOPENMEWHILELIVE.oauth' (create a file with that exact name). 
-- Open StreamersVsChat.py and replace everything that says "Julianstap" (my twitch) with your twitch username. Easiest way to do this is have Visual Studio Code (vscode), open the .workspace file, press ctrl+f and search for Julianstap and replace all with your username.
+- Open `Server/StreamersVsChat/StreamersVsChat.py` and replace everything that says "Julianstap" (my twitch) with your twitch username. Easiest way to do this is have Visual Studio Code (vscode), open the .workspace file, press ctrl+f and search for Julianstap and replace all with your username.
 - Replace BEAMMP_SERVER_EXE_FOLDER with the folder where your *BeamMP-Server.exe* is located.
   
 *Windows*:
