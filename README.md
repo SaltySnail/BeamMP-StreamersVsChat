@@ -16,7 +16,7 @@ To make this work you'll need to change some stuff:
 *Linux*:
 - Download the latest release.
 - unzip the release to your `<beammp_server_executable>/Resources/` folder (`unzip StreamersVsChat.zip && cp -r Server <beammp_server_executable>/Resources/Server && cp -r Client <beammp_server_executable>/Resources/Client`). Anything in between "<>" should be replaced by your directory path.
-- Do the same first four steps (with your preferred text editor or IDE).
+- Do the same first three steps (with your preferred text editor or IDE).
 - Run `pip3 install ahk`
 - Now you can start it with: `python3 <beammp_server_executable>/Resources/Server/StreamersVsChat/StreamersVsChat.py`
 
