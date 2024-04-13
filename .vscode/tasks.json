@@ -24,17 +24,17 @@
             "options": {
                 "cwd": "Server"
             }
-        }//,
-        // {
-        //     "label": "Compress Release",
-        //     "type": "shell",
-        //     "command": "zip -r ../SumoBeamMP.zip Resources",
-        //     "windows": {
-        //         "command": "7z a -tzip ../SumoBeamMP.zip Resources -aoa -r"
-        //     },
-        //     "options": {
-        //         "cwd": "export"
-        //     }
-        // }
+        },
+        {
+            "label": "Compress Release",
+            "type": "shell",
+            "command": "rm -f Client && rm -f StreamersVsChat.zip && cd ../Client && zip -r Client/StreamersVsChat.zip && cd ../export && ../Client && zip -r StreamersVsChat.zip Client ../Server",
+            "windows": {
+                "command": "Remove-Item -Path Client -Force -Recurse -ErrorAction SilentlyContinue ; Remove-Item -Path StreamersVsChat.zip -Force -ErrorAction SilentlyContinue ; Set-Location -Path ../Client ; 7z a -tzip ../export/Client/StreamersVsChat.zip . -aoa -r ; Set-Location -Path ../export ; 7z a -tzip StreamersVsChat.zip Client ../Server -aoa -r"
+            },
+            "options": {
+                "cwd": "export"
+            }
+        }
     ]
 }
