@@ -1,6 +1,6 @@
 import socket
 import threading
-from ahk import AHK #auto hotkey
+# from ahk import AHK #auto hotkey
 import time
 import json #to write data file
 import os #check file size
@@ -8,7 +8,7 @@ import vlc #sound effects
 
 #Download Autohotkey at https://www.autohotkey.com/ and provide the address to
 #AutoHotkey.exe below!
-ahk = AHK(executable_path='C:\\Program Files\\AutoHotkey\\v2\\AutoHotkey.exe')
+# ahk = AHK(executable_path='C:\\Program Files\\AutoHotkey\\v2\\AutoHotkey.exe')
 
 SERVER = "irc.twitch.tv"
 PORT = 6667
@@ -661,10 +661,10 @@ def gamecontrol():
 		# 	sendToBeamNG(buffer)
 		# 	message = ""
 
-		if "ignition" == message.lower():
-			ahk.key_down('v')
-			ignitionEndTime = time.time() + PRESS_TIME
-			message = ""
+		# if "ignition" == message.lower(): #FIXME implement this in game
+		# 	ahk.key_down('v')
+		# 	ignitionEndTime = time.time() + PRESS_TIME
+		# 	message = ""
 
 		# if "rain" == message.lower():
 		# 	buffer = {
@@ -694,9 +694,9 @@ def gamecontrol():
 		# 	johnCenaAllowedTime = time.time() + 600
 		# 	message = ""
 
-		if time.time() >= ignitionEndTime:
-			ahk.key_up('v')
-			ignitionEndTime = 100000000000
+		# if time.time() >= ignitionEndTime: #FIXME this needs to happen in game lua
+		# 	ahk.key_up('v')
+		# 	ignitionEndTime = 100000000000
 
 def printPinMessage():
 	print("\n\n\n\n\n\n\n")
