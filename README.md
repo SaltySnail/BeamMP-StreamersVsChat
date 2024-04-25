@@ -13,16 +13,15 @@ To make this work you'll need to change some stuff:
 - Inside '*BeamMP-Server.exe Location*/Resources/Server/' create a folder named StreamersVsChat.
 - In vscode right click folder explorer on the left and press Open in integrated terminal and type `pip3 install ahk`
 
+After all these changes press 'ctrl+shift+p' and run the tasks 'Copy server' and 'Compress client'. Next right click on 'StreamersVsChat.py' and click 'Run Python File in Terminal'. It will print out all available twitch chat commands in the terminal.
+
 *Linux*:
 - Download the latest release.
 - unzip the release to your `<beammp_server_executable>/Resources/` folder (`unzip StreamersVsChat.zip && cp -r Server <beammp_server_executable>/Resources/Server && cp -r Client <beammp_server_executable>/Resources/Client`). Anything in between "<>" should be replaced by your directory path.
 - Do the same first three steps (with your preferred text editor or IDE).
-- Run `pip3 install ahk`
 - Now you can start it with: `python3 <beammp_server_executable>/Resources/Server/StreamersVsChat/StreamersVsChat.py`
 
-After all these changes press 'ctrl+shift+p' and run the tasks 'Copy server' and 'Compress client'. Next right click on 'StreamersVsChat.py' and click 'Run Python File in Terminal'. It will print out all available twitch chat commands in the terminal.
 
 If you want have the commands only apply on you, change BEAMMP_NAME to your beammp username.
-
 
 Now you are ready to start the server and receive commands from the twitch chat (you can test this without streaming).
