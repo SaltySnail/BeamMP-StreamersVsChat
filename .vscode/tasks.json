@@ -17,12 +17,12 @@
         {
             "label": "Copy server",
             "type": "shell",
-            "command": "cp 'StreamersVsChat.lua' 'C:/Users/Julian/Desktop/beammp_Server/windows/Resources/Server/StreamersVsChat/StreamersVsChat.lua'",
+            "command": "cp 'StreamersVsChat.lua' 'C:/Users/Julian/Desktop/beammp_Server/windows/Resources/Server/StreamersVsChat.lua'",
             "windows": {
                 "command": "Copy-Item 'StreamersVsChat.lua' 'C:/Users/Julian/Desktop/beammp_Server/windows/Resources/Server/StreamersVsChat/StreamersVsChat.lua'"
             },
             "options": {
-                "cwd": "Server"
+                "cwd": "Server/StreamersVsChat"
             }
         },
         {

@@ -11,7 +11,7 @@ local curFOV = 0
 -- soundFiles.drift = "/art/sound/tokyo"
 
 function onPlaySound(data)
-	Engine.Audio.playOnce('AudioGui', "/art/sound/" .. data, {volume = 100})
+	Engine.Audio.playOnce('AudioGui', "/art/sound/" .. data, {volume = 65})
 end
 
 function onJump(data)
@@ -177,15 +177,17 @@ function onStopLookLeft()
 	core_camera.rotate_yaw(0, "FILTER_PAD")
 end
 
-function onBlind()
-	print("onBlind Called") 
+function onScreenRGB(arg)
+	print("onScreenRGB Called") 
 	scenetree["PostEffectCombinePassObject"]:setField("enableBlueShift", 0, 1)
+	scenetree["PostEffectCombinePassObject"]:setField("blueShiftColor", 0, arg)
 	-- Engine.Audio.playOnce('AudioGui', soundFiles.blind, {volume = 100})
 end
 
-function onStopBlind()
-	print("onStopBlind Called") 
-	scenetree["PostEffectCombinePassObject"]:setField("enableBlueShift", 0, 0) --It seems enableBlueShift is working bevause of the transporter gamaemode, so this featture will only work with transporter installed
+function onStopScreenRGB(arg)
+	print("onStopScreenRGB Called") 
+	scenetree["PostEffectCombinePassObject"]:setField("enableBlueShift", 0, 0) --blueShift is the colorShift of the screen, glad naming things is hard for the beam team as well.
+	scenetree["PostEffectCombinePassObject"]:setField("blueShiftColor", 0, arg)
 end
 
 function onLights()
@@ -211,6 +213,21 @@ end
 function onBackflip(data)
 	print("onBackflip Called") 
 	be:queueAllObjectLua("if StreamersVsChat then StreamersVsChat.onBackflip(" .. data .. ") end")
+end
+
+function onSiren()
+	print("onSiren Called") 
+	be:queueAllObjectLua("if StreamersVsChat then StreamersVsChat.onSiren() end")
+end
+
+function onIgnitionOff()
+	print("onIgnitionOff Called") 
+	be:queueAllObjectLua("if StreamersVsChat then StreamersVsChat.onIgnitionOff() end")
+end
+
+function onIgnitionOn()
+	print("onIgnitionOn Called") 
+	be:queueAllObjectLua("if StreamersVsChat then StreamersVsChat.onIgnitionOn() end")
 end
 
 -- function onFOVIncrease()
@@ -263,8 +280,8 @@ local function onExtensionLoaded()
 	AddEventHandler("onStopLookRight", onStopLookRight)
 	AddEventHandler("onLookLeft", onLookLeft)
 	AddEventHandler("onStopLookLeft", onStopLookLeft)
-	AddEventHandler("onBlind", onBlind)
-	AddEventHandler("onStopBlind", onStopBlind)
+	AddEventHandler("onScreenRGB", onScreenRGB)
+	AddEventHandler("onStopScreenRGB", onStopScreenRGB)
 	AddEventHandler("onFOVIncrease", onFOVIncrease)
 	AddEventHandler("onStopFOVIncrease", onStopFOVIncrease)
 	AddEventHandler("onChangeCamera", onChangeCamera)
@@ -274,6 +291,8 @@ local function onExtensionLoaded()
 	AddEventHandler("onIce", onIce)
 	AddEventHandler("onStopIce", onStopIce)
 	AddEventHandler("onBackflip", onBackflip)
+	AddEventHandler("onIgnitionOff", onIgnitionOff)
+	AddEventHandler("onIgnitionOn", onIgnitionOn)
 end
 
 M.onExtensionLoaded = onExtensionLoaded --these are exposed globally via the metatable so that they can be called by the game itself
@@ -311,8 +330,8 @@ M.onStopLookRight = onStopLookRight
 M.onLookRight = onLookRight
 M.onStopLookLeft = onStopLookLeft
 M.onLookLeft = onLookLeft
-M.onStopBlind = onStopBlind
-M.onBlind = onBlind
+M.onStopScreenRGB = onStopScreenRGB
+M.onScreenRGB = onScreenRGB
 M.onStopFOVIncrease = onStopFOVIncrease
 M.onFOVIncrease = onFOVIncrease
 M.onChangeCamera = onChangeCamera
@@ -322,5 +341,7 @@ M.onExplode = onExplode
 M.onIce = onIce
 M.onStopIce = onStopIce
 M.onBackflip = onBackflip
+M.onIgnitionOff = onIgnitionOff
+M.onIgnitionOn = onIgnitionOn
 
 return M --return the metatable

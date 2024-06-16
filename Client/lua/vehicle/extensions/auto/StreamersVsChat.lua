@@ -297,6 +297,16 @@ function onStopIce()
 	resetTyreGrip()
 end
 
+function onIgnitionOff()
+	print("onIgnitionOff called")
+	electrics.setIgnitionLevel(0)
+end
+
+function onIgnitionOn()
+	print("onIgnitionOn called")
+	electrics.setIgnitionLevel(3)
+end
+
 -- Expose the function to GElua
 -- beamngVehicle = {}
 -- beamngVehicle.onDrift = M.onDrift
@@ -330,5 +340,7 @@ M.onExplode = onExplode
 M.onIce = onIce
 M.onStopIce = onStopIce
 M.onBackflip = onBackflip
+M.onIgnitionOff = onIgnitionOff
+M.onIgnitionOn = onIgnitionOn
 
 return M

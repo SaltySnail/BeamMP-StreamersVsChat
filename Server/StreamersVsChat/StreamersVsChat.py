@@ -11,7 +11,7 @@ import vlc #sound effects
 # ahk = AHK(executable_path='C:\\Program Files\\AutoHotkey\\v2\\AutoHotkey.exe')
 
 SERVER = "irc.twitch.tv"
-PORT = 6667
+PORT = 80
 
 PASS = "" #make empty global variable
 #Your OAUTH Code Here https://twitchapps.com/tmi/
@@ -28,12 +28,17 @@ CHANNEL = "Julianstap"
 #Your account
 OWNER = "Julianstap"
 
-BEAMMP_NAME = "-1" #-1 for all players
+irc = socket.socket()
+
+irc.connect((SERVER, PORT))
+irc.send((	"PASS " + PASS + "\n" +
+			"NICK " + BOT + "\n" +
+			"JOIN #" + CHANNEL + "\n").encode())
 
 BEAMMP_SERVER_EXE_FOLDER = "C:/Users/Julian/Desktop/beammp_Server/windows"
 
 PRESS_TIME = 0.5 #s
-SHORT_COOLDOWN = 1 #s
+SHORT_COOLDOWN = 120 #s
 
 BEAMNGCOMMANDS = [
 					{	#use honk as an example for a command which triggers two commands and has no sound effect
@@ -48,12 +53,14 @@ BEAMNGCOMMANDS = [
 						"beamng":True,
 						"hasThirdFunction":False,
 						"beamCommand":"honk",
-						"argument":"nil",
-						"secondFunction":{
-							"beamng":True,
-							"beamCommand":"stopHonk",
-							"argument":"nil",
-							"endTime":100000000000 #don't change this variable, this is used for logic
+						"argument":"nil",						
+						"extraFunctions":{
+							"0":{
+								"beamng":True,
+								"beamCommand":"stopHonk",
+								"argument":"nil",
+								"endTime":100000000000 #don't change this variable, this is used for logic
+							}
 						}
 					},
 					{	#use siren as an example for a command which triggers one command and has no sound effect
@@ -82,13 +89,14 @@ BEAMNGCOMMANDS = [
 						"beamng":True,
 						"hasThirdFunction":False,
 						"beamCommand":"brake",
-						"argument":"nil",
-						"secondFunction":
-						{
-							"beamng":True,
-							"beamCommand":"stopBrake",
-							"argument":"nil",
-							"endTime":100000000000 #don't change this variable, this is used for logic
+						"argument":"nil",						
+						"extraFunctions":{
+							"0":{
+								"beamng":True,
+								"beamCommand":"stopBrake",
+								"argument":"nil",
+								"endTime":100000000000 #don't change this variable, this is used for logic
+							}
 						}
 					},
 					{	
@@ -133,18 +141,20 @@ BEAMNGCOMMANDS = [
 						"hasThirdFunction":True,
 						"beamCommand":"johncena",
 						"argument":"nil",
-						"secondFunction":{
-							"beamng":True,
-							"beamCommand":"hop",
-							"argument":"20",
-							"delay":1,
-							"endTime":100000000000 #don't change this variable, this is used for logic
-						},
-						"thirdFunction":{
-							"beamng":True,
-							"beamCommand":"hop",
-							"argument":"-40",
-							"endTime":100000000000 #don't change this variable, this is used for logic
+						"extraFunctions":{
+							"0":{
+								"beamng":True,
+								"beamCommand":"hop",
+								"argument":"20",
+								"delay":1,
+								"endTime":100000000000 #don't change this variable, this is used for logic
+							},
+							"1":{
+								"beamng":True,
+								"beamCommand":"hop",
+								"argument":"-40",
+								"endTime":100000000000 #don't change this variable, this is used for logic
+							}
 						}
 					},
 					{
@@ -169,7 +179,7 @@ BEAMNGCOMMANDS = [
 						"soundDelayEndTime":0, #don't change this variable, this is used for logic
 						"soundName":"GASGASGAS",
 						"beamCommand":"boost",
-						"argument":"10"
+						"argument":"5"
 					},
 					{
 						"command":"boost backwards",
@@ -183,7 +193,7 @@ BEAMNGCOMMANDS = [
 						"beamng":True,
 						"hasThirdFunction":False,
 						"beamCommand":"boost",
-						"argument":"-4"
+						"argument":"-10"
 					},
 					{	
 						"command":"handbrake",
@@ -197,12 +207,14 @@ BEAMNGCOMMANDS = [
 						"beamng":True,
 						"hasThirdFunction":False,
 						"beamCommand":"handbrake",
-						"argument":"nil",
-						"secondFunction":{
-							"beamng":True,
-							"beamCommand":"stopHandbrake",
-							"argument":"nil",
-							"endTime":100000000000 #don't change this variable, this is used for logic
+						"argument":"nil",						
+						"extraFunctions":{
+							"0":{
+								"beamng":True,
+								"beamCommand":"stopHandbrake",
+								"argument":"nil",
+								"endTime":100000000000 #don't change this variable, this is used for logic
+							}
 						}
 					},
 					{
@@ -226,13 +238,15 @@ BEAMNGCOMMANDS = [
 						"delayAfterSound":1,
 						"soundDelayEndTime":0, #don't change this variable, this is used for logic
 						"soundName":"blind",
-						"beamCommand":"blind",
-						"argument":"nil",
-						"secondFunction":{
-							"beamng":True,
-							"beamCommand":"stopBlind",
-							"argument":"nil",
-							"endTime":100000000000 #don't change this variable, this is used for logic
+						"beamCommand":"screenRGB",
+						"argument":"0 0 0",						
+						"extraFunctions":{
+							"0":{
+								"beamng":True,
+								"beamCommand":"StopScreenRGB",
+								"argument":"0 0 0",
+								"endTime":100000000000 #don't change this variable, this is used for logic
+							}
 						}
 					},
 					{
@@ -247,12 +261,14 @@ BEAMNGCOMMANDS = [
 						"beamng":True,
 						"hasThirdFunction":False,
 						"beamCommand":"lookBack",
-						"argument":"nil",
-						"secondFunction":{
-							"beamng":True,
-							"beamCommand":"stopLookBack",
-							"argument":"nil",
-							"endTime":100000000000 #don't change this variable, this is used for logic
+						"argument":"nil",						
+						"extraFunctions":{
+							"0":{
+								"beamng":True,
+								"beamCommand":"stopLookBack",
+								"argument":"nil",
+								"endTime":100000000000 #don't change this variable, this is used for logic
+							}
 						}
 					},
 					{
@@ -267,12 +283,14 @@ BEAMNGCOMMANDS = [
 						"beamng":True,
 						"hasThirdFunction":False,
 						"beamCommand":"moon",
-						"argument":"nil",
-						"secondFunction":{
-							"beamng":True,
-							"beamCommand":"earth",
-							"argument":"nil",
-							"endTime":100000000000 #don't change this variable, this is used for logic
+						"argument":"nil",						
+						"extraFunctions":{
+							"0":{
+								"beamng":True,
+								"beamCommand":"earth",
+								"argument":"nil",
+								"endTime":100000000000 #don't change this variable, this is used for logic
+							}
 						}
 					},
 					{
@@ -287,12 +305,14 @@ BEAMNGCOMMANDS = [
 						"beamng":True,
 						"hasThirdFunction":False,
 						"beamCommand":"clutch",
-						"argument":"nil",
-						"secondFunction":{
-							"beamng":True,
-							"beamCommand":"stopClutch",
-							"argument":"nil",
-							"endTime":100000000000 #don't change this variable, this is used for logic
+						"argument":"nil",						
+						"extraFunctions":{
+							"0":{
+								"beamng":True,
+								"beamCommand":"stopClutch",
+								"argument":"nil",
+								"endTime":100000000000 #don't change this variable, this is used for logic
+							}
 						}
 					},
 					{
@@ -300,7 +320,7 @@ BEAMNGCOMMANDS = [
 						"waitingOnEndOfSound":False, #don't change this variable, this is used for logic
 						"caseSensitive":False,
 						"pressTime":PRESS_TIME,
-						"cooldown":SHORT_COOLDOWN,
+						"cooldown":2400,
 						"cooldownEndTime":time.time(), #don't change this variable, this is used for logic
 						"hasSecondFunction":True,
 						# "hasSound":False, #implemented in VE lua
@@ -317,12 +337,14 @@ BEAMNGCOMMANDS = [
 						"beamng":True,
 						"hasThirdFunction":False,
 						"beamCommand":"drift",
-						"argument":"nil",
-						"secondFunction":{
-							"beamng":True,
-							"beamCommand":"stopDrift",
-							"argument":"nil",
-							"endTime":100000000000 #don't change this variable, this is used for logic
+						"argument":"nil",						
+						"extraFunctions":{
+							"0":{
+								"beamng":True,
+								"beamCommand":"stopDrift",
+								"argument":"nil",
+								"endTime":100000000000 #don't change this variable, this is used for logic
+							}
 						}
 					},
 					{
@@ -337,12 +359,14 @@ BEAMNGCOMMANDS = [
 						"beamng":True,
 						"hasThirdFunction":False,
 						"beamCommand":"lookLeft",
-						"argument":"nil",
-						"secondFunction":{
-							"beamng":True,
-							"beamCommand":"stopLookLeft",
-							"argument":"nil",
-							"endTime":100000000000 #don't change this variable, this is used for logic
+						"argument":"nil",						
+						"extraFunctions":{
+							"0":{
+								"beamng":True,
+								"beamCommand":"stopLookLeft",
+								"argument":"nil",
+								"endTime":100000000000 #don't change this variable, this is used for logic
+							}
 						}
 					},
 					{
@@ -357,12 +381,14 @@ BEAMNGCOMMANDS = [
 						"beamng":True,
 						"hasThirdFunction":False,
 						"beamCommand":"lookRight",
-						"argument":"nil",
-						"secondFunction":{
-							"beamng":True,
-							"beamCommand":"stopLookRight",
-							"argument":"nil",
-							"endTime":100000000000 #don't change this variable, this is used for logic
+						"argument":"nil",						
+						"extraFunctions":{
+							"0":{
+								"beamng":True,
+								"beamCommand":"stopLookRight",
+								"argument":"nil",
+								"endTime":100000000000 #don't change this variable, this is used for logic
+							}
 						}
 					},
 					{
@@ -377,12 +403,14 @@ BEAMNGCOMMANDS = [
 						"beamng":True,
 						"hasThirdFunction":False,
 						"beamCommand":"steerRight",
-						"argument":"nil",
-						"secondFunction":{
-							"beamng":True,
-							"beamCommand":"stopSteerRight",
-							"argument":"nil",
-							"endTime":100000000000 #don't change this variable, this is used for logic
+						"argument":"nil",						
+						"extraFunctions":{
+							"0":{
+								"beamng":True,
+								"beamCommand":"stopSteerRight",
+								"argument":"nil",
+								"endTime":100000000000 #don't change this variable, this is used for logic
+							}
 						}
 					},
 					{
@@ -397,12 +425,36 @@ BEAMNGCOMMANDS = [
 						"beamng":True,
 						"hasThirdFunction":False,
 						"beamCommand":"steerLeft",
-						"argument":"nil",
-						"secondFunction":{
-							"beamng":True,
-							"beamCommand":"stopSteerLeft",
-							"argument":"nil",
-							"endTime":100000000000 #don't change this variable, this is used for logic
+						"argument":"nil",						
+						"extraFunctions":{
+							"0":{
+								"beamng":True,
+								"beamCommand":"stopSteerLeft",
+								"argument":"nil",
+								"endTime":100000000000 #don't change this variable, this is used for logic
+							}
+						}
+					},
+					{
+						"command":"ignition",
+						"waitingOnEndOfSound":False, #don't change this variable, this is used for logic
+						"caseSensitive":False,
+						"pressTime":PRESS_TIME,
+						"cooldown":SHORT_COOLDOWN,
+						"cooldownEndTime":time.time(), #don't change this variable, this is used for logic
+						"hasSecondFunction":True,
+						"hasSound":False,
+						"beamng":True,
+						"hasThirdFunction":False,
+						"beamCommand":"ignitionOff",
+						"argument":"nil",						
+						"extraFunctions":{
+							"0":{
+								"beamng":True,
+								"beamCommand":"ignitionOn",
+								"argument":"nil",
+								"endTime":100000000000 #don't change this variable, this is used for logic
+							}
 						}
 					},
 					{
@@ -410,7 +462,7 @@ BEAMNGCOMMANDS = [
 						"waitingOnEndOfSound":False, #don't change this variable, this is used for logic
 						"caseSensitive":False,
 						"pressTime":3,
-						"cooldown":SHORT_COOLDOWN,
+						"cooldown":660,
 						"cooldownEndTime":time.time(), #don't change this variable, this is used for logic
 						"hasSecondFunction":True,
 						"hasSound":True,
@@ -420,19 +472,21 @@ BEAMNGCOMMANDS = [
 						"beamng":True,
 						"hasThirdFunction":False,
 						"beamCommand":"ice",
-						"argument":"nil",
-						"secondFunction":{
-							"beamng":True,
-							"beamCommand":"stopIce",
-							"argument":"nil",
-							"endTime":100000000000 #don't change this variable, this is used for logic
+						"argument":"nil",						
+						"extraFunctions":{
+							"0":{
+								"beamng":True,
+								"beamCommand":"stopIce",
+								"argument":"nil",
+								"endTime":100000000000 #don't change this variable, this is used for logic
+							}
 						}
 					},
 					{
-						"command":"DO A BARREL ROLL!", #TODO: figure out a better way to do multiple functions on one command
+						"command":"DO A BARREL ROLL!", 
 						"waitingOnEndOfSound":False, #don't change this variable, this is used for logic
 						"caseSensitive":True,
-						"pressTime":0.5, #same as PRESS_TIME, but that could change.
+						"pressTime":0.5, #same as PRESS_TIME, but PRESS_TIME could change.
 						"cooldown":1200,
 						"cooldownEndTime":time.time(), #don't change this variable, this is used for logic
 						"hasSound":True,
@@ -448,20 +502,21 @@ BEAMNGCOMMANDS = [
 						"beamng":True,
 						"beamCommand":"hop",
 						"argument":"10",
-						"hasSecondFunction":True,
-						"secondFunction":{
-							"beamng":True,
-							"beamCommand":"DO A BARREL ROLL!",
-							"argument":"-7.5",
-							"endTime":100000000000, #don't change this variable, this is used for logic
-							"delay":0.6
-						},
-						"hasThirdFunction":True,
-						"thirdFunction":{
-							"beamng":True,
-							"beamCommand":"DO A BARREL ROLL!",
-							"argument":"5",
-							"endTime":100000000000 #don't change this variable, this is used for logic
+						"hasSecondFunction":True,						
+						"extraFunctions":{
+							"0":{
+								"beamng":True,
+								"beamCommand":"DO A BARREL ROLL!",
+								"argument":"-7.5",
+								"endTime":100000000000, #don't change this variable, this is used for logic
+								"delay":0.6
+							},
+							"1":{
+								"beamng":True,
+								"beamCommand":"DO A BARREL ROLL!",
+								"argument":"5",
+								"endTime":100000000000 #don't change this variable, this is used for logic
+							}
 						}
 					},
 					{
@@ -561,12 +616,14 @@ BEAMNGCOMMANDS = [
 						"pressTime":PRESS_TIME,
 						"cooldown":1800,
 						"cooldownEndTime":time.time(), #don't change this variable, this is used for logic
-						"hasSecondFunction":True,
-						"secondFunction":{
-							"beamng":True,
-							"beamCommand":"backflip",
-							"argument":"-4.5",
-							"endTime":100000000000 #don't change this variable, this is used for logic
+						"hasSecondFunction":True,						
+						"extraFunctions":{
+								"0":{
+								"beamng":True,
+								"beamCommand":"backflip",
+								"argument":"-4.5",
+								"endTime":100000000000 #don't change this variable, this is used for logic
+							}
 						},
 						"hasSound":True,
 						"delayAfterSound":6,
@@ -576,22 +633,471 @@ BEAMNGCOMMANDS = [
 						"hasThirdFunction":False,
 						"beamCommand":"hop",
 						"argument":"10"
-					}
+					},
+					{
+						"command":"MOVE IT MOVE IT!", 
+						"waitingOnEndOfSound":False, #don't change this variable, this is used for logic
+						"caseSensitive":True,
+						"pressTime":0.3, 
+						"cooldown":1200,
+						"cooldownEndTime":time.time(), #don't change this variable, this is used for logic
+						"hasSound":True,
+						"delayAfterSound":0,
+						"soundDelayEndTime":0, #don't change this variable, this is used for logic
+						"soundName":"moveit",
+						# "sound":{
+						# 	"delay":1,
+						# 	"endTime":time.time(), #don't change this variable, this is used for logic
+						# 	"filename":"barrelroll.mp3",
+						# 	"volume":100
+						# },
+						"beamng":True,
+						"beamCommand":"spin",
+						"argument":"2",
+						"hasSecondFunction":True,						
+						"extraFunctions":{
+							"0":{
+								"beamng":True,
+								"beamCommand":"spin",
+								"argument":"-2",
+								"endTime":100000000000, #don't change this variable, this is used for logic
+								"delay":0.01
+							},
+							"1":{
+								"beamng":True,
+								"beamCommand":"spin",
+								"argument":"-2",
+								"endTime":100000000000, #don't change this variable, this is used for logic
+								"delay":0.3
+							},
+							"2":{
+								"beamng":True,
+								"beamCommand":"spin",
+								"argument":"2",
+								"endTime":100000000000, #don't change this variable, this is used for logic
+								"delay":0.01
+							},
+							"3":{
+								"beamng":True,
+								"beamCommand":"spin",
+								"argument":"2",
+								"endTime":100000000000, #don't change this variable, this is used for logic
+								"delay":0.3
+							},
+							"4":{
+								"beamng":True,
+								"beamCommand":"spin",
+								"argument":"-2",
+								"endTime":100000000000, #don't change this variable, this is used for logic
+								"delay":0.01
+							},
+							"5":{
+								"beamng":True,
+								"beamCommand":"spin",
+								"argument":"-2",
+								"endTime":100000000000, #don't change this variable, this is used for logic
+								"delay":0.3
+							},
+							"6":{
+								"beamng":True,
+								"beamCommand":"spin",
+								"argument":"2",
+								"endTime":100000000000, #don't change this variable, this is used for logic
+								"delay":0.01
+							},
+							"7":{
+								"beamng":True,
+								"beamCommand":"spin",
+								"argument":"2",
+								"endTime":100000000000, #don't change this variable, this is used for logic
+								"delay":0.3
+							},
+							"8":{
+								"beamng":True,
+								"beamCommand":"spin",
+								"argument":"-2",
+								"endTime":100000000000, #don't change this variable, this is used for logic
+								"delay":0.01
+							},
+							"9":{
+								"beamng":True,
+								"beamCommand":"spin",
+								"argument":"-2",
+								"endTime":100000000000, #don't change this variable, this is used for logic
+								"delay":0.3
+							},
+							"10":{
+								"beamng":True,
+								"beamCommand":"spin",
+								"argument":"2",
+								"endTime":100000000000, #don't change this variable, this is used for logic
+								"delay":0.01
+							}
+						}
+					},
+					{
+						"command":"DJ OTTO!", 
+						"waitingOnEndOfSound":False, #don't change this variable, this is used for logic
+						"caseSensitive":True,
+						"pressTime":0.3, 
+						"cooldown":1200,
+						"cooldownEndTime":time.time(), #don't change this variable, this is used for logic
+						"hasSound":True,
+						"delayAfterSound":0,
+						"soundDelayEndTime":0, #don't change this variable, this is used for logic
+						"soundName":"Otto",
+						# "sound":{
+						# 	"delay":1,
+						# 	"endTime":time.time(), #don't change this variable, this is used for logic
+						# 	"filename":"barrelroll.mp3",
+						# 	"volume":100
+						# },
+						"beamng":True,
+						"beamCommand":"screenRGB",
+						"argument":"64 0 0",
+						"hasSecondFunction":True,						
+						"extraFunctions":{
+							"0":{
+								"beamng":True,
+								"beamCommand":"screenRGB",
+								"argument":"0 64 0",
+								"endTime":100000000000, #don't change this variable, this is used for logic
+								"delay":0.3
+							},
+							"1":{
+								"beamng":True,
+								"beamCommand":"screenRGB",
+								"argument":"0 0 64",
+								"endTime":100000000000, #don't change this variable, this is used for logic
+								"delay":0.3
+							},
+							"2":{
+								"beamng":True,
+								"beamCommand":"screenRGB",
+								"argument":"64 64 0",
+								"endTime":100000000000, #don't change this variable, this is used for logic
+								"delay":0.3
+							},
+							"3":{
+								"beamng":True,
+								"beamCommand":"screenRGB",
+								"argument":"0 64 64",
+								"endTime":100000000000, #don't change this variable, this is used for logic
+								"delay":0.3
+							},
+							"4":{
+								"beamng":True,
+								"beamCommand":"screenRGB",
+								"argument":"64 0 0",
+								"endTime":100000000000, #don't change this variable, this is used for logic
+								"delay":0.3
+							},
+							"5":{
+								"beamng":True,
+								"beamCommand":"screenRGB",
+								"argument":"0 64 0",
+								"endTime":100000000000, #don't change this variable, this is used for logic
+								"delay":0.3
+							},
+							"6":{
+								"beamng":True,
+								"beamCommand":"screenRGB",
+								"argument":"0 0 64",
+								"endTime":100000000000, #don't change this variable, this is used for logic
+								"delay":0.3
+							},
+							"7":{
+								"beamng":True,
+								"beamCommand":"screenRGB",
+								"argument":"64 64 0",
+								"endTime":100000000000, #don't change this variable, this is used for logic
+								"delay":0.3
+							},
+							"8":{
+								"beamng":True,
+								"beamCommand":"screenRGB",
+								"argument":"0 64 64",
+								"endTime":100000000000, #don't change this variable, this is used for logic
+								"delay":0.3
+							},
+							"9":{
+								"beamng":True,
+								"beamCommand":"screenRGB",
+								"argument":"64 0 0",
+								"endTime":100000000000, #don't change this variable, this is used for logic
+								"delay":0.3
+							},
+							"10":{
+								"beamng":True,
+								"beamCommand":"screenRGB",
+								"argument":"0 64 0",
+								"endTime":100000000000, #don't change this variable, this is used for logic
+								"delay":0.3
+							},
+							"11":{
+								"beamng":True,
+								"beamCommand":"screenRGB",
+								"argument":"0 0 64",
+								"endTime":100000000000, #don't change this variable, this is used for logic
+								"delay":0.3
+							},
+							"12":{
+								"beamng":True,
+								"beamCommand":"screenRGB",
+								"argument":"64 64 0",
+								"endTime":100000000000, #don't change this variable, this is used for logic
+								"delay":0.3
+							},
+							"13":{
+								"beamng":True,
+								"beamCommand":"screenRGB",
+								"argument":"0 64 64",
+								"endTime":100000000000, #don't change this variable, this is used for logic
+								"delay":0.3
+							},
+							"14":{
+								"beamng":True,
+								"beamCommand":"screenRGB",
+								"argument":"64 0 0",
+								"endTime":100000000000, #don't change this variable, this is used for logic
+								"delay":0.3
+							},
+							"15":{
+								"beamng":True,
+								"beamCommand":"screenRGB",
+								"argument":"0 64 0",
+								"endTime":100000000000, #don't change this variable, this is used for logic
+								"delay":0.3
+							},
+							"16":{
+								"beamng":True,
+								"beamCommand":"screenRGB",
+								"argument":"0 0 64",
+								"endTime":100000000000, #don't change this variable, this is used for logic
+								"delay":0.3
+							},
+							"17":{
+								"beamng":True,
+								"beamCommand":"screenRGB",
+								"argument":"64 64 0",
+								"endTime":100000000000, #don't change this variable, this is used for logic
+								"delay":0.3
+							},
+							"18":{
+								"beamng":True,
+								"beamCommand":"screenRGB",
+								"argument":"0 64 64",
+								"endTime":100000000000, #don't change this variable, this is used for logic
+								"delay":0.3
+							},
+							"19":{
+								"beamng":True,
+								"beamCommand":"screenRGB",
+								"argument":"64 0 64",
+								"endTime":100000000000, #don't change this variable, this is used for logic
+								"delay":0.3
+							},
+							"20":{
+								"beamng":True,
+								"beamCommand":"screenRGB",
+								"argument":"64 0 0",
+								"endTime":100000000000, #don't change this variable, this is used for logic
+								"delay":0.3
+							},
+							"21":{
+								"beamng":True,
+								"beamCommand":"screenRGB",
+								"argument":"0 64 0",
+								"endTime":100000000000, #don't change this variable, this is used for logic
+								"delay":0.3
+							},
+							"22":{
+								"beamng":True,
+								"beamCommand":"screenRGB",
+								"argument":"0 0 64",
+								"endTime":100000000000, #don't change this variable, this is used for logic
+								"delay":0.3
+							},
+							"23":{
+								"beamng":True,
+								"beamCommand":"screenRGB",
+								"argument":"64 64 0",
+								"endTime":100000000000, #don't change this variable, this is used for logic
+								"delay":0.3
+							},
+							"24":{
+								"beamng":True,
+								"beamCommand":"screenRGB",
+								"argument":"0 64 64",
+								"endTime":100000000000, #don't change this variable, this is used for logic
+								"delay":0.3
+							},
+							"25":{
+								"beamng":True,
+								"beamCommand":"screenRGB",
+								"argument":"64 0 64",
+								"endTime":100000000000, #don't change this variable, this is used for logic
+								"delay":0.3
+							},
+							"26":{
+								"beamng":True,
+								"beamCommand":"screenRGB",
+								"argument":"64 0 0",
+								"endTime":100000000000, #don't change this variable, this is used for logic
+								"delay":0.3
+							},
+							"27":{
+								"beamng":True,
+								"beamCommand":"screenRGB",
+								"argument":"0 64 0",
+								"endTime":100000000000, #don't change this variable, this is used for logic
+								"delay":0.3
+							},
+							"28":{
+								"beamng":True,
+								"beamCommand":"screenRGB",
+								"argument":"0 0 64",
+								"endTime":100000000000, #don't change this variable, this is used for logic
+								"delay":0.3
+							},
+							"29":{
+								"beamng":True,
+								"beamCommand":"screenRGB",
+								"argument":"64 64 0",
+								"endTime":100000000000, #don't change this variable, this is used for logic
+								"delay":0.3
+							},
+							"30":{
+								"beamng":True,
+								"beamCommand":"screenRGB",
+								"argument":"0 64 64",
+								"endTime":100000000000, #don't change this variable, this is used for logic
+								"delay":0.3
+							},
+							"31":{
+								"beamng":True,
+								"beamCommand":"screenRGB",
+								"argument":"0 64 0",
+								"endTime":100000000000, #don't change this variable, this is used for logic
+								"delay":0.3
+							},
+							"32":{
+								"beamng":True,
+								"beamCommand":"screenRGB",
+								"argument":"0 0 64",
+								"endTime":100000000000, #don't change this variable, this is used for logic
+								"delay":0.3
+							},
+							"33":{
+								"beamng":True,
+								"beamCommand":"screenRGB",
+								"argument":"64 64 0",
+								"endTime":100000000000, #don't change this variable, this is used for logic
+								"delay":0.3
+							},
+							"34":{
+								"beamng":True,
+								"beamCommand":"screenRGB",
+								"argument":"0 64 64",
+								"endTime":100000000000, #don't change this variable, this is used for logic
+								"delay":0.3
+							},
+							"35":{
+								"beamng":True,
+								"beamCommand":"screenRGB",
+								"argument":"64 0 64",
+								"endTime":100000000000, #don't change this variable, this is used for logic
+								"delay":0.3
+							},
+							"36":{
+								"beamng":True,
+								"beamCommand":"screenRGB",
+								"argument":"64 0 0",
+								"endTime":100000000000, #don't change this variable, this is used for logic
+								"delay":0.3
+							},
+							"37":{
+								"beamng":True,
+								"beamCommand":"screenRGB",
+								"argument":"0 64 0",
+								"endTime":100000000000, #don't change this variable, this is used for logic
+								"delay":0.3
+							},
+							"38":{
+								"beamng":True,
+								"beamCommand":"screenRGB",
+								"argument":"0 0 64",
+								"endTime":100000000000, #don't change this variable, this is used for logic
+								"delay":0.3
+							},
+							"39":{
+								"beamng":True,
+								"beamCommand":"screenRGB",
+								"argument":"64 64 0",
+								"endTime":100000000000, #don't change this variable, this is used for logic
+								"delay":0.3
+							},
+							"40":{
+								"beamng":True,
+								"beamCommand":"screenRGB",
+								"argument":"64 0 64",
+								"endTime":100000000000, #don't change this variable, this is used for logic
+								"delay":0.3
+							},
+							"41":{
+								"beamng":True,
+								"beamCommand":"screenRGB",
+								"argument":"64 0 0",
+								"endTime":100000000000, #don't change this variable, this is used for logic
+								"delay":0.3
+							},
+							"42":{
+								"beamng":True,
+								"beamCommand":"stopScreenRGB",
+								"argument":"0 0 0",
+								"endTime":100000000000, #don't change this variable, this is used for logic
+								"delay":0.3
+							}
+						}
+					} # ,
+					# {
+					# 	"command":"banana", 
+					# 	"waitingOnEndOfSound":False, #don't change this variable, this is used for logic
+					# 	"caseSensitive":False,
+					# 	"pressTime":0.2, #same as PRESS_TIME, but that could change.
+					# 	"cooldown":600,
+					# 	"cooldownEndTime":time.time(), #don't change this variable, this is used for logic
+					# 	"hasSound":False,
+					# 	"beamng":True,
+					# 	"beamCommand":"ice",
+					# 	"argument":"10",
+					# 	"hasSecondFunction":True,
+					# 	"secondFunction":{
+					# 		"beamng":True,
+					# 		"beamCommand":"spin",
+					# 		"argument":"15",
+					# 		"endTime":100000000000, #don't change this variable, this is used for logic
+					# 		"delay":0.6
+					# 	},
+					# 	"hasThirdFunction":True,
+					# 	"thirdFunction":{
+					# 		"beamng":True,
+					# 		"beamCommand":"stopIce",
+					# 		"argument":"5",
+					# 		"endTime":100000000000 #don't change this variable, this is used for logic
+					# 	}
+					# }
 				]
 
 message = ""
 user = ""
 
-irc = socket.socket()
-
-irc.connect((SERVER, PORT))
-irc.send((	"PASS " + PASS + "\n" +
-			"NICK " + BOT + "\n" +
-			"JOIN #" + CHANNEL + "\n").encode())
 
 def gamecontrol():
 	global message
-	ignitionEndTime = 100000000000
+	global beammp_name
+	beammp_name = "Julianstap" #-1 for all players
+	# ignitionEndTime = 100000000000
 	emptyBuffer = {
 		"name": "",
 		"message": "",
@@ -599,24 +1105,37 @@ def gamecontrol():
 	}
 	sendToBeamNG(emptyBuffer) #create the data file
 	printPinMessage()
+	# ALL_COMMANDS_DELAY = 30 #s
+	# ALL_COMMANDS_DELAY_ENDTIME = 0
+	targeting_prefix = "Target "
 	while True:
+		# if time.time() >= ALL_COMMANDS_DELAY_ENDTIME:
+			# ALL_COMMANDS_DELAY_ENDTIME = time.time() + ALL_COMMANDS_DELAY
+		# if message != "" and message != "twitch.tv/tags":
+		# 	print(message)
+		if message.startswith(targeting_prefix): 
+			beammp_name = message[len(targeting_prefix):]
+			message = ""
+			# print(beammp_name)
 		commandsOnChat()
-		secondCommandsAfterDelay()
-		thirdCommandsAfterDelay()
+		extraCommands()
+
+		# secondCommandsAfterDelay()
+		# thirdCommandsAfterDelay()
 
 		# if "left" == message.lower():
 		# 	# ahk.key_down('Left')
 		# 	# leftEndTime = time.time() + PRESS_TIME
 		# 	# message = ""
 		# 	buffer = {
-		# 		"name": BEAMMP_NAME,
+		# 		"name": beammp_name,
 		# 		"message": "steerLeft",
 		# 		"argument": "nil"
 		# 	}
 		# 	sendToBeamNG(buffer)
 		# 	time.sleep(PRESS_TIME)
 		# 	buffer = {
-		# 		"name": BEAMMP_NAME,
+		# 		"name": beammp_name,
 		# 		"message": "stopSteerLeft",
 		# 		"argument": "nil"
 		# 	}
@@ -628,14 +1147,14 @@ def gamecontrol():
 		# 	# rightEndTime = time.time() + PRESS_TIME
 		# 	# message = ""
 		# 	buffer = {
-		# 		"name": BEAMMP_NAME,
+		# 		"name": beammp_name,
 		# 		"message": "steerRight",
 		# 		"argument": "nil"
 		# 	}
 		# 	sendToBeamNG(buffer)
 		# 	time.sleep(PRESS_TIME)
 		# 	buffer = {
-		# 		"name": BEAMMP_NAME,
+		# 		"name": beammp_name,
 		# 		"message": "stopSteerRight",
 		# 		"argument": "nil"
 		# 	}
@@ -647,14 +1166,14 @@ def gamecontrol():
 		# 	# honkEndTime = time.time() + PRESS_TIME
 		# 	# message = ""
 		# 	buffer = {
-		# 		"name": BEAMMP_NAME,
+		# 		"name": beammp_name,
 		# 		"message": "cameraUpsideDown",
 		# 		"argument": "nil"
 		# 	}
 		# 	sendToBeamNG(buffer)
 		# 	time.sleep(PRESS_TIME)
 		# 	buffer = {
-		# 		"name": BEAMMP_NAME,
+		# 		"name": beammp_name,
 		# 		"message": "stopCameraUpsideDown",
 		# 		"argument": "nil"
 		# 	}
@@ -668,7 +1187,7 @@ def gamecontrol():
 
 		# if "rain" == message.lower():
 		# 	buffer = {
-		# 		"name": BEAMMP_NAME,
+		# 		"name": beammp_name,
 		# 		"message": "rain",
 		# 		"argument": "nil"
 		# 	}
@@ -679,14 +1198,14 @@ def gamecontrol():
 		# 	# playSound("JOHNCENA.mp3", 80)
 		# 	# time.sleep(1)
 		# 	buffer = {
-		# 		"name": BEAMMP_NAME,
+		# 		"name": beammp_name,
 		# 		"message": "FOVIncrease",
 		# 		"argument": "nil"
 		# 	}
 		# 	sendToBeamNG(buffer)
 		# 	time.sleep(0.5)
 		# 	buffer = {
-		# 		"name": BEAMMP_NAME,
+		# 		"name": beammp_name,
 		# 		"message": "stopFOVIncrease",
 		# 		"argument": "nil"
 		# 	}
@@ -707,7 +1226,7 @@ def printPinMessage():
 
 def handleSound(commandData):
 	buffer = {
-		"name": BEAMMP_NAME,
+		"name": beammp_name,
 		"message": "playSound",
 		"argument": commandData["soundName"]
 	}
@@ -735,46 +1254,63 @@ def commandsOnChat():
 						data["waitingOnEndOfSound"] = False
 						data["soundDelayEndTime"] = 0
 				buffer = {
-					"name": BEAMMP_NAME,
+					"name": beammp_name,
 					"message": data["beamCommand"],
 					"argument": data["argument"]
 				}
 				sendToBeamNG(buffer)
-				if data["hasSecondFunction"]:
-					data["secondFunction"]["endTime"] = time.time() + data["pressTime"]
+				if "extraFunctions" in data.keys():
+					data["extraFunctions"]["0"]["endTime"] = time.time() + data["pressTime"]
 				if data["cooldown"]:
 					data["cooldownEndTime"] = time.time() + data["cooldown"]
 				# if data["hasSound"]: #kept here for when someone wants a sound effect for the streamer alone
 				# 	data["sound"]["endTime"] = time.time() + data["sound"]["delay"]
 			message = ""
 
-def secondCommandsAfterDelay(): #this should be a table in the datastructure...
+def extraCommands(): #this should be a table in the datastructure...
 	global message
 	for data in BEAMNGCOMMANDS:
-		# if data["hasSound"] and time.time() > data["sound"]["endTime"]:
-		# 	continue
-		if data["hasSecondFunction"] and time.time() > data["secondFunction"]["endTime"]:
-			buffer = {
-				"name": BEAMMP_NAME,
-				"message": data["secondFunction"]["beamCommand"],
-				"argument": data["secondFunction"]["argument"]
-			}
-			sendToBeamNG(buffer)
-			data["secondFunction"]["endTime"] = 100000000000
-			if data["hasThirdFunction"]:
-				data["thirdFunction"]["endTime"] = time.time() + data["secondFunction"]["delay"]
+		if "extraFunctions" in data.keys():
+			# print(data["extraFunctions"])
+			for i in data["extraFunctions"]:
+				if time.time() > data["extraFunctions"][i]["endTime"]:
+					buffer = {
+						"name": beammp_name,
+						"message": data["extraFunctions"][i]["beamCommand"],
+						"argument": data["extraFunctions"][i]["argument"]
+					}
+					sendToBeamNG(buffer)
+					data["extraFunctions"][i]["endTime"] = 100000000000
+					if str(int(i) + 1) in data["extraFunctions"]:
+						data["extraFunctions"][str(int(i) + 1)]["endTime"] = time.time() + data["extraFunctions"][i]["delay"]
 			
-def thirdCommandsAfterDelay():
-	global message
-	for data in BEAMNGCOMMANDS:
-		if data["hasThirdFunction"] and time.time() > data["thirdFunction"]["endTime"]:
-			buffer = {
-				"name": BEAMMP_NAME,
-				"message": data["thirdFunction"]["beamCommand"],
-				"argument": data["thirdFunction"]["argument"]
-			}
-			sendToBeamNG(buffer)
-			data["thirdFunction"]["endTime"] = 100000000000
+# def secondCommandsAfterDelay(): #this should be a table in the datastructure...
+# 	global message
+# 	for data in BEAMNGCOMMANDS:
+# 		# if data["hasSound"] and time.time() > data["sound"]["endTime"]:
+# 		# 	continue
+# 		if data["hasSecondFunction"] and time.time() > data["secondFunction"]["endTime"]:
+# 			buffer = {
+# 				"name": beammp_name,
+# 				"message": data["secondFunction"]["beamCommand"],
+# 				"argument": data["secondFunction"]["argument"]
+# 			}
+# 			sendToBeamNG(buffer)
+# 			data["secondFunction"]["endTime"] = 100000000000
+# 			if data["hasThirdFunction"]:
+# 				data["thirdFunction"]["endTime"] = time.time() + data["secondFunction"]["delay"]
+			
+# def thirdCommandsAfterDelay():
+# 	global message
+# 	for data in BEAMNGCOMMANDS:
+# 		if data["hasThirdFunction"] and time.time() > data["thirdFunction"]["endTime"]:
+# 			buffer = {
+# 				"name": beammp_name,
+# 				"message": data["thirdFunction"]["beamCommand"],
+# 				"argument": data["thirdFunction"]["argument"]
+# 			}
+# 			sendToBeamNG(buffer)
+# 			data["thirdFunction"]["endTime"] = 100000000000
 
 def sendToBeamNG(buffer):
 	existing_data = []  # Initialize with an empty list
@@ -878,5 +1414,5 @@ def main():
 		t1 = threading.Thread(target = twitch)
 		t1.start()
 		t2 = threading.Thread(target = gamecontrol)
-		t2. start()
+		t2.start()
 main()

@@ -43,6 +43,8 @@ possibleCommands["explode"] = "onExplode"
 possibleCommands["ice"] = "onIce"
 possibleCommands["stopIce"] = "onStopIce"
 possibleCommands["backflip"] = "onBackflip"
+possibleCommands["ignitionOff"] = "onIgnitionOff"
+possibleCommands["ignitionOn"] = "onIgnitionOn"
 
 function dump(o)
     if type(o) == 'table' then
@@ -60,12 +62,16 @@ end
 function svcTimer()
 	if not players then return end
 	local file = io.open("StreamersVsChatData.json", "r")
-	local content = file:read("*all")
-	file:close()
+	local content = ""
+	if file then
+		content = file:read("*all")
+		file:close()
+	end
+	if not content or content == "" then return end
+	
+	print("content: " .. content)
 	file = io.open("StreamersVsChatData.json", "w") --overwrite file
 	file:close()
-	
-	if not content or content == "" then return end
 	
 	local allData = Util.JsonDecode(content)
 	if not allData then return end
