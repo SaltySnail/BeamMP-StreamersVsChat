@@ -31,8 +31,8 @@ possibleCommands["lookLeft"] = "onLookLeft"
 possibleCommands["stopLookLeft"] = "onStopLookLeft"
 possibleCommands["lookRight"] = "onLookRight"
 possibleCommands["stopLookRight"] = "onStopLookRight"
-possibleCommands["blind"] = "onBlind"
-possibleCommands["stopBlind"] = "onStopBlind"
+possibleCommands["screenRGB"] = "onScreenRGB"
+possibleCommands["stopScreenRGB"] = "onStopScreenRGB"
 possibleCommands["FOVIncrease"] = "onFOVIncrease"
 possibleCommands["stopFOVIncrease"] = "onStopFOVIncrease"
 possibleCommands["changeCamera"] = "onChangeCamera"
@@ -45,6 +45,11 @@ possibleCommands["stopIce"] = "onStopIce"
 possibleCommands["backflip"] = "onBackflip"
 possibleCommands["ignitionOff"] = "onIgnitionOff"
 possibleCommands["ignitionOn"] = "onIgnitionOn"
+possibleCommands["DVDImage"] = "onDVDImage"
+possibleCommands["stopDVDImage"] = "onStopDVDImage"
+possibleCommands["FullscreenImage"] = "onFullscreenImage"
+possibleCommands["stopFullscreenImage"] = "onStopFullscreenImage"
+possibleCommands["switchUILayout"] = "onSwitchUILayout"
 
 function dump(o)
     if type(o) == 'table' then
@@ -75,12 +80,8 @@ function svcTimer()
 	
 	local allData = Util.JsonDecode(content)
 	if not allData then return end
-	
-	-- print(dump(allData))
-	-- Iterate over each table in allData
+
 	for i, data in ipairs(allData) do
-		-- print(dump(data))
-		-- Now you can access the fields of each table
 		for id, player in pairs(players) do
 			if player.name == data["name"] or data["name"] == "-1" then
 				if data["name"] == "-1" then

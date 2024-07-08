@@ -1,17 +1,15 @@
 local M = {} --metatable
 
 local curFOV = 0
-
--- local soundFiles = {}
--- -- Initialize sound
--- soundFiles.barrelroll = "art/sound/barrelroll"
--- soundFiles.blind = "/art/sound/blind"
--- soundFiles.boost = "/art/sound/GASGASGAS"
--- soundFiles.johncena = "art/sound/JOHNCENA"
--- soundFiles.drift = "/art/sound/tokyo"
+local UILayoutActive = {}
 
 function onPlaySound(data)
-	Engine.Audio.playOnce('AudioGui', "/art/sound/" .. data, {volume = 65})
+	-- paramGroupSVC = SFXParameterGroup()
+	-- paramGroupSVC:registerObject('')
+	-- soundSVC = Engine.Audio.createSource2('AudioGui', "/art/sound/" .. data, {volume = 65})
+	-- paramGroupSVC:addSource(soundSVC)
+	-- soundSVC:play(-1)
+	Engine.Audio.playOnce('AudioGui', "/art/sound/" .. data, {volume = 25, channel = 'Music'})
 end
 
 function onJump(data)
@@ -230,6 +228,52 @@ function onIgnitionOn()
 	be:queueAllObjectLua("if StreamersVsChat then StreamersVsChat.onIgnitionOn() end")
 end
 
+local function startUILayout(name) --TODO FIXME this ain't working
+	if #UILayoutActive == 0 then
+		core_gamestate.setGameState('svc', 'svc', 'svc')
+	end
+	UILayoutActive[name] = true
+end
+
+local function stopUILayout(name)
+	UILayoutActive[name] = nil
+	if #UILayoutActive == 0 then
+		core_gamestate.setGameState('multiplayer', 'multiplayer', 'multiplayer')
+	end
+end
+
+function onDVDImage(path)
+	print("onDVDImage Called")
+	-- startUILayout("DVDImage:" .. path)
+	guihooks.trigger('svcAddDVDImage', path)
+end
+
+function onStopDVDImage(path)
+	print("onStopDVDImage Called")
+	-- stopUILayout("DVDImage:" .. path)
+	guihooks.trigger('svcRemoveDVDImage', path)
+end
+
+function onFullscreenImage(path)
+	print("onFullscreenImage Called")
+	-- startUILayout("FullscreenImage:" .. path)
+	guihooks.trigger('svcAddFullscreenImage', path)
+end
+
+function onStopFullscreenImage(path)
+	print("onStopFullscreenImage Called")
+	-- stopUILayout("FullscreenImage:" .. path)
+	guihooks.trigger('svcRemoveFullscreenImage', path)
+end
+
+function onSwitchUILayout(name)
+	core_gamestate.setGameState(name, name, name)
+end
+
+local function onUILayoutLoaded(layoutType) --TODO FIXME, this needs a queue system for the guihooks.trigger functions
+	curUILayout = layoutType
+end
+
 -- function onFOVIncrease()
 -- 	print("onFOVIncrease Called") 
 -- 	curFOV = core_camera.getFovDeg()
@@ -293,6 +337,11 @@ local function onExtensionLoaded()
 	AddEventHandler("onBackflip", onBackflip)
 	AddEventHandler("onIgnitionOff", onIgnitionOff)
 	AddEventHandler("onIgnitionOn", onIgnitionOn)
+	AddEventHandler("onDVDImage", onDVDImage)
+	AddEventHandler("onStopDVDImage", onStopDVDImage)
+	AddEventHandler("onFullscreenImage", onFullscreenImage)
+	AddEventHandler("onStopFullscreenImage", onStopFullscreenImage)
+	AddEventHandler("onSwitchUILayout", onSwitchUILayout)
 end
 
 M.onExtensionLoaded = onExtensionLoaded --these are exposed globally via the metatable so that they can be called by the game itself
@@ -343,5 +392,11 @@ M.onStopIce = onStopIce
 M.onBackflip = onBackflip
 M.onIgnitionOff = onIgnitionOff
 M.onIgnitionOn = onIgnitionOn
+M.onDVDImage = onDVDImage
+M.onStopDVDImage = onStopDVDImage
+M.onFullscreenImage = onFullscreenImage
+M.onStopFullscreenImage = onStopFullscreenImage
+M.onUILayoutLoaded = onUILayoutLoaded
+M.onSwitchUILayout = onSwitchUILayout
 
 return M --return the metatable

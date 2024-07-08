@@ -1,0 +1,17 @@
+{
+  "domElement": "<svc></svc>",
+  "name": "StreamersVsChat",
+  "types": [
+    "ui.apps.categories.info"
+  ],
+  "description": "The UI of the StreamersVsChat gamemode.",
+  "css": {
+    "left":"0px",
+    "height": "100%",
+    "bottom": "0px",
+    "width": "100%"
+  },
+  "author": "Julianstap",
+  "version": "0.1",
+  "directive": "svc"
+}
